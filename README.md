@@ -19,4 +19,3 @@ Open `index.html` in a browser, or run `python3 -m http.server` and go to http:/
 
 ## Before launch
 - Confirm a PayPal **Business** account is registered to `thepersistfoundation@gmail.com`, then make a small test donation.
-- Once the IRS grants 501(c)(3) status, add the EIN and a tax-deductibility statement to the Donate section and footer.
