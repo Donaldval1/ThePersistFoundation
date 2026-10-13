@@ -11,7 +11,12 @@ Static one-page site for The Persist Foundation (*Until I Succeed!*).
 ## Run locally
 Open `index.html` in a browser, or run `python3 -m http.server` and go to http://localhost:8000.
 
+## Contact & donations
+- Contact email: `thepersistfoundation@gmail.com` (the contact form opens the visitor's email app addressed to it).
+- Donations go to PayPal's donate page for the PayPal account registered to `thepersistfoundation@gmail.com`
+  (see the hidden `business` field on the donate form in `index.html`). Donors can choose a one-time or monthly gift.
+- To use a PayPal hosted button instead, replace the `business` hidden input with `<input type="hidden" name="hosted_button_id" value="...">`.
+
 ## Before launch
-- Replace `info@thepersistfoundation.org` (in `index.html` and `script.js`) with the real address.
-- Connect the donate form to a payment provider (see the `TODO` in `script.js`).
-- Review the placeholder copy: mission, programs, values and quote.
+- Confirm a PayPal **Business** account is registered to `thepersistfoundation@gmail.com`, then make a small test donation.
+- Once the IRS grants 501(c)(3) status, add the EIN and a tax-deductibility statement to the Donate section and footer.

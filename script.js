@@ -43,36 +43,42 @@ if ("IntersectionObserver" in window) {
   sections.forEach((s) => spy.observe(s));
 }
 
-// Donation amount picker
+// Donation amount picker — submits to PayPal's donate page
 const donateForm = document.getElementById("donate-form");
 const donateTotal = document.getElementById("donate-total");
 const donateNote = document.getElementById("donate-note");
+const donateOther = document.getElementById("donate-other");
+const donateAmount = document.getElementById("donate-amount");
+const presets = donateForm.querySelectorAll('input[name="preset"]');
 
 function currentAmount() {
-  const custom = parseInt(donateForm.custom.value, 10);
-  if (custom > 0) return custom;
-  const picked = donateForm.querySelector('input[name="amount"]:checked');
+  const other = parseFloat(donateOther.value);
+  if (other > 0) return Math.round(other * 100) / 100;
+  const picked = donateForm.querySelector('input[name="preset"]:checked');
   return picked ? parseInt(picked.value, 10) : 0;
 }
 
-donateForm.addEventListener("input", (e) => {
-  if (e.target.name === "amount") donateForm.custom.value = "";
-  if (e.target.name === "custom" && e.target.value) {
-    donateForm.querySelectorAll('input[name="amount"]').forEach((r) => (r.checked = false));
-  }
-  donateTotal.textContent = "$" + currentAmount().toLocaleString();
+function updateTotal() {
+  const amount = currentAmount();
+  donateTotal.textContent = amount ? "$" + amount.toLocaleString() : "";
+}
+
+presets.forEach((r) => r.addEventListener("change", () => { donateOther.value = ""; updateTotal(); }));
+donateOther.addEventListener("input", () => {
+  if (donateOther.value) presets.forEach((r) => (r.checked = false));
+  updateTotal();
 });
 
 donateForm.addEventListener("submit", (e) => {
-  e.preventDefault();
   const amount = currentAmount();
   if (!amount) {
+    e.preventDefault();
     donateNote.textContent = "Please choose or enter an amount.";
     donateNote.className = "form-note error";
     return;
   }
-  // TODO: connect to a payment provider (e.g. Stripe, PayPal, Givebutter).
-  donateNote.textContent = `Thank you! Online giving of $${amount.toLocaleString()} will be available soon.`;
+  donateAmount.value = amount.toFixed(2);
+  donateNote.textContent = "Opening PayPal in a new tab… Thank you for your support!";
   donateNote.className = "form-note success";
 });
 
@@ -98,11 +104,18 @@ contactForm.addEventListener("submit", (e) => {
   const { name, email, interest, message } = contactForm;
   const subject = encodeURIComponent(`${interest.value} — ${name.value}`);
   const body = encodeURIComponent(`${message.value}\n\nFrom: ${name.value} <${email.value}>`);
-  window.location.href = `mailto:info@thepersistfoundation.org?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:thepersistfoundation@gmail.com?subject=${subject}&body=${body}`;
 
   contactNote.textContent = "Thanks! Your email app should open to send the message.";
   contactNote.className = "form-note success";
   contactForm.reset();
+});
+
+// "Get Involved" links preselect the matching topic in the contact form
+document.querySelectorAll("[data-interest]").forEach((link) => {
+  link.addEventListener("click", () => {
+    contactForm.interest.value = link.dataset.interest;
+  });
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();

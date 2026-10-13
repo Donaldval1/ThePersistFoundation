@@ -178,7 +178,7 @@ p  { margin: 0 0 1.1em; }
   color: var(--white);
 }
 
-.card-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 .card {
   padding: 2rem 1.6rem; border-radius: var(--radius);
   background: rgba(255, 255, 255, .05); border: 1px solid rgba(245, 210, 122, .25);
@@ -208,7 +208,7 @@ p  { margin: 0 0 1.1em; }
 .quote-band p { font-family: var(--font-serif); font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.4; }
 .quote-band cite { font-style: normal; letter-spacing: .2em; text-transform: uppercase; font-size: .8rem; color: var(--gold); font-weight: 700; }
 
-.involve-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.involve-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
 .involve {
   padding: 2.2rem 2rem; border-radius: var(--radius); background: var(--white);
   border: 1px solid rgba(7, 51, 13, .1);
@@ -226,6 +226,7 @@ p  { margin: 0 0 1.1em; }
 }
 .donate-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
 .donate-grid > div p { color: rgba(255, 255, 255, .82); }
+.donate-grid > div p.small { font-size: .9rem; color: rgba(255, 255, 255, .65); }
 
 .donate-card {
   background: var(--white); color: var(--ink); border-radius: calc(var(--radius) + 4px);
@@ -291,7 +292,7 @@ textarea { resize: vertical; }
 
 /* Responsive ------------------------------------------------------------- */
 @media (max-width: 1024px) {
-  .card-grid, .values { grid-template-columns: repeat(2, 1fr); }
+  .values, .involve-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 860px) {
@@ -313,11 +314,11 @@ textarea { resize: vertical; }
   .hero-seal { order: -1; width: min(70%, 320px); }
   .lead { margin-inline: auto; }
   .hero-actions { justify-content: center; }
-  .involve-grid { grid-template-columns: 1fr; }
+  .card-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 560px) {
-  .card-grid, .values { grid-template-columns: 1fr; }
+  .values, .involve-grid { grid-template-columns: 1fr; }
   .brand-text { font-size: .75rem; }
   .motto-band p { letter-spacing: .25em; font-size: .8rem; }
   .amounts { grid-template-columns: repeat(2, 1fr); }
